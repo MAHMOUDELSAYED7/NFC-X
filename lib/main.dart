@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'core/utils/routes.dart';
+import 'presentation/view/landing_screen.dart';
+import 'presentation/view/nfc_read_screen.dart';
+import 'presentation/view/nfc_write_screen.dart';
+
 void main() => runApp(ProviderScope(child: const MyApp()));
 
 class MyApp extends StatelessWidget {
@@ -30,7 +35,17 @@ class MyApp extends StatelessWidget {
           colorSchemeSeed: Colors.blue,
           brightness: Brightness.light,
         ),
+        routes: _buildRoutes(),
+        initialRoute: RoutesManager.landingScreen,
       ),
     );
+  }
+
+  Map<String, WidgetBuilder> _buildRoutes() {
+    return {
+      RoutesManager.landingScreen: (context) => const LandingScreen(),
+      RoutesManager.nfcWriteDataScreen: (context) => NfcWriteScreen(),
+      RoutesManager.nfcReadDataScreen: (context) => NfcReadScreen(),
+    };
   }
 }
